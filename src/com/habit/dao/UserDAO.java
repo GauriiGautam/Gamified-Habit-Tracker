@@ -9,15 +9,12 @@ import java.util.List;
 
 public class UserDAO {
 
-    /**
-     * Authenticate user with hashed password (simplified for now without bcrypt)
-     */
     public User authenticate(String username, String password) {
         String query = "SELECT * FROM User WHERE Username = ? AND Password = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, username);
-            stmt.setString(2, password); // Note: In production, password should be hashed.
+            stmt.setString(2, password); 
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -27,12 +24,10 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null; // Authentication failed
+        return null; 
     }
 
-    /**
-     * Retrieve user by ID
-     */
+    
     public User getUserById(long userId) {
         String query = "SELECT * FROM User WHERE UserID = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
@@ -50,10 +45,7 @@ public class UserDAO {
         return null;
     }
 
-    /**
-     * Create a new User
-     * Returns true if successful.
-     */
+    
     public boolean registerUser(User user) {
         String query = "INSERT INTO User (Username, Email, Password, FullName, CurrentLevel, TotalXP, IsActive, AIPredictionEnabled, AnomalyDetectionEnabled, AdaptiveDifficultyEnabled) " +
                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -78,9 +70,7 @@ public class UserDAO {
         return false;
     }
 
-    /**
-     * Update user login timestamp
-     */
+    
     public boolean updateLastLogin(long userId) {
         String query = "UPDATE User SET LastLoginDate = CURRENT_TIMESTAMP WHERE UserID = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
@@ -93,9 +83,7 @@ public class UserDAO {
         return false;
     }
 
-    /**
-     * Helper to map a ResultSet row to a User object
-     */
+    
     private User extractUserFromResultSet(ResultSet rs) throws SQLException {
         return new User(
                 rs.getLong("UserID"),

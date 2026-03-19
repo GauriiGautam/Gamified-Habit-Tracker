@@ -48,7 +48,7 @@ public class Habit {
         this.optimalDifficultyScore = optimalDifficultyScore;
     }
 
-    // Getters and Setters
+  
     public long getHabitId() { return habitId; }
     public void setHabitId(long habitId) { this.habitId = habitId; }
 

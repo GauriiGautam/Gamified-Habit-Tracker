@@ -9,9 +9,7 @@ import java.util.List;
 
 public class GoalDAO {
 
-    /**
-     * Get active goals for a habit
-     */
+   
     public List<Goal> getActiveGoalsForHabit(long habitId) {
         List<Goal> goals = new ArrayList<>();
         String query = "SELECT * FROM Goal WHERE HabitID = ? AND Status = 'IN_PROGRESS'";
@@ -31,9 +29,7 @@ public class GoalDAO {
         return goals;
     }
 
-    /**
-     * Create a new Goal
-     */
+  
     public boolean createGoal(Goal goal) {
         String query = "INSERT INTO Goal (HabitID, GoalType, TargetCompletions, StartDate, EndDate, Status) " +
                        "VALUES (?, ?, ?, ?, ?, ?)";
@@ -54,9 +50,7 @@ public class GoalDAO {
         return false;
     }
 
-    /**
-     * Update Goal Progress
-     */
+    
     public boolean updateGoalProgress(long goalId, int newCompletedCount, String newStatus) {
         String query = "UPDATE Goal SET CompletedCount = ?, Status = ? WHERE GoalID = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();

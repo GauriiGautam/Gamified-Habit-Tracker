@@ -27,26 +27,26 @@ public class AnalyticsPanel extends JPanel {
         setBackground(new Color(40, 44, 52));
         setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // Header
+        
         JLabel titleLabel = new JLabel("AI Insights & Analytics", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
         titleLabel.setForeground(new Color(241, 196, 15)); // Gold
         add(titleLabel, BorderLayout.NORTH);
 
-        // Grid for Stats
+        
         JPanel statsGrid = new JPanel(new GridLayout(3, 1, 10, 10));
         statsGrid.setOpaque(false);
         statsGrid.setBorder(new EmptyBorder(20, 0, 0, 0));
 
-        // 1. LSTM Success Prediction
+        
         JPanel lstmPanel = createStatCard("LSTM Success Prediction (Tomorrow)", getLSTMPredictionString());
         statsGrid.add(lstmPanel);
 
-        // 2. Behavioral Anomaly
+        
         JPanel anomalyPanel = createStatCard("Autoencoder Behavioral Anomaly", getAnomalyString());
         statsGrid.add(anomalyPanel);
         
-        // 3. Simulated Heatmap
+       
         JPanel heatmapPanel = createHeatmapCard();
         statsGrid.add(heatmapPanel);
 
@@ -91,17 +91,17 @@ public class AnalyticsPanel extends JPanel {
         JPanel maps = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
         maps.setOpaque(false);
         
-        // Draw 7 colored boxes simulating a heatmap
+        
         for (int i=0; i<7; i++) {
             JPanel dayBox = new JPanel();
             dayBox.setPreferredSize(new Dimension(25, 25));
-            // Simulate random completion vs failure
+            
             boolean completed = Math.random() > 0.3;
             if (completed) {
-                dayBox.setBackground(new Color(38, 166, 91)); // Green
+                dayBox.setBackground(new Color(38, 166, 91)); 
                 dayBox.setToolTipText("Completed");
             } else {
-                dayBox.setBackground(new Color(255, 85, 85)); // Red
+                dayBox.setBackground(new Color(255, 85, 85)); 
                 dayBox.setToolTipText("Failed/Missed");
             }
             maps.add(dayBox);

@@ -8,11 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Habit DNA Analysis Module
- * Analyzes completion patterns across time to identify optimal time-of-day
- * and calculate consistency scores.
- */
+
 public class HabitDNAAnalyzer {
     
     private HabitLogDAO logDAO;
@@ -21,10 +17,7 @@ public class HabitDNAAnalyzer {
         this.logDAO = new HabitLogDAO();
     }
 
-    /**
-     * Calculates the Optimal Time of Day for a specific habit based on previous logs.
-     * Evaluates Morning (5am-12pm), Afternoon (12pm-5pm), Evening (5pm-9pm), Night (9pm-5am).
-     */
+    
     public String calculateOptimalTimeOfDay(long habitId) {
         List<HabitLog> logs = logDAO.getLogsByHabitId(habitId);
         if (logs == null || logs.isEmpty()) {
@@ -55,7 +48,7 @@ public class HabitDNAAnalyzer {
             }
         }
 
-        // Find the bucket with the maximum completions
+        
         String optimalTime = "Morning";
         int maxCompletions = -1;
 
@@ -69,17 +62,14 @@ public class HabitDNAAnalyzer {
         return optimalTime;
     }
 
-    /**
-     * Calculates a consistency score (0-100) based on the variance of logging times.
-     * Lower variance = higher consistency score.
-     */
+    
     public float calculateConsistencyScore(long habitId) {
         List<HabitLog> logs = logDAO.getLogsByHabitId(habitId);
         if (logs == null || logs.size() < 3) {
-            return 0.0f; // Need at least a few logs to calculate consistency
+            return 0.0f; 
         }
 
-        // Simplistic algorithm: evaluate standard deviation of completion hour
+        
         double sumHour = 0;
         for (HabitLog log : logs) {
             @SuppressWarnings("deprecation")
@@ -98,7 +88,7 @@ public class HabitDNAAnalyzer {
 
         double standardDeviation = Math.sqrt(varianceSum / logs.size());
         
-        // Let's say an STD of 0 hours = 100 consistency, an STD of >6 hours = 0 consistency
+        
         float consistencyScore = (float) (100.0 - (standardDeviation * (100.0 / 6.0)));
         if (consistencyScore < 0) consistencyScore = 0;
         if (consistencyScore > 100) consistencyScore = 100;

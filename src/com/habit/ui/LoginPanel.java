@@ -23,27 +23,27 @@ public class LoginPanel extends JPanel {
         this.userDAO = new UserDAO();
 
         setLayout(new GridBagLayout());
-        setBackground(new Color(40, 44, 52)); // Modern dark theme
+        setBackground(new Color(40, 44, 52)); 
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Title
+        
         JLabel titleLabel = new JLabel("Habit Tracker Login");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
         titleLabel.setForeground(Color.WHITE);
         gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
         add(titleLabel, gbc);
 
-        // Subtitle
+        
         JLabel subtitleLabel = new JLabel("Enterprise AI & Gamification Edition");
         subtitleLabel.setFont(new Font("Segoe UI", Font.ITALIC, 14));
         subtitleLabel.setForeground(new Color(150, 150, 150));
         gbc.gridy = 1;
         add(subtitleLabel, gbc);
 
-        // Username
+        
         JLabel userLabel = new JLabel("Username:");
         userLabel.setForeground(Color.LIGHT_GRAY);
         gbc.gridy = 2; gbc.gridwidth = 1;
@@ -53,7 +53,6 @@ public class LoginPanel extends JPanel {
         gbc.gridx = 1;
         add(usernameField, gbc);
 
-        // Password
         JLabel passLabel = new JLabel("Password:");
         passLabel.setForeground(Color.LIGHT_GRAY);
         gbc.gridx = 0; gbc.gridy = 3;
@@ -63,14 +62,14 @@ public class LoginPanel extends JPanel {
         gbc.gridx = 1;
         add(passwordField, gbc);
 
-        // Error Label
+        
         errorLabel = new JLabel(" ");
         errorLabel.setForeground(new Color(255, 85, 85)); // Soft red
         errorLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
         gbc.gridx = 0; gbc.gridy = 4; gbc.gridwidth = 2;
         add(errorLabel, gbc);
 
-        // Buttons
+        
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 10, 0));
         buttonPanel.setOpaque(false);
         
@@ -90,7 +89,7 @@ public class LoginPanel extends JPanel {
         gbc.gridy = 5;
         add(buttonPanel, gbc);
 
-        // Action Listeners
+        
         loginBtn.addActionListener(this::handleLogin);
         registerBtn.addActionListener(this::handleRegister);
     }
@@ -126,7 +125,7 @@ public class LoginPanel extends JPanel {
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setPassword(password);
-        newUser.setEmail(username + "@example.com"); // Simple stub
+        newUser.setEmail(username + "@example.com"); 
         newUser.setFullName(username);
         newUser.setCurrentLevel(1);
         newUser.setTotalXp(0);
@@ -137,10 +136,10 @@ public class LoginPanel extends JPanel {
 
         boolean success = userDAO.registerUser(newUser);
         if (success) {
-            errorLabel.setForeground(new Color(38, 166, 91)); // Green
+            errorLabel.setForeground(new Color(38, 166, 91)); 
             errorLabel.setText("Registration successful! You can now log in.");
         } else {
-            errorLabel.setForeground(new Color(255, 85, 85)); // Red
+            errorLabel.setForeground(new Color(255, 85, 85)); 
             errorLabel.setText("Registration failed. Username may exist.");
         }
     }

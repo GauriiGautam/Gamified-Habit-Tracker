@@ -28,7 +28,7 @@ public class Goal {
         this.createdDate = createdDate;
     }
 
-    // Getters and Setters
+    
     public long getGoalId() { return goalId; }
     public void setGoalId(long goalId) { this.goalId = goalId; }
 

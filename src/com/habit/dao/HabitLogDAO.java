@@ -9,9 +9,7 @@ import java.util.List;
 
 public class HabitLogDAO {
 
-    /**
-     * Retrieve all logs for a specific habit
-     */
+    
     public List<HabitLog> getLogsByHabitId(long habitId) {
         List<HabitLog> logs = new ArrayList<>();
         String query = "SELECT * FROM Habit_Log WHERE HabitID = ? ORDER BY CompletionDate DESC, CompletionTime DESC";
@@ -31,9 +29,7 @@ public class HabitLogDAO {
         return logs;
     }
 
-    /**
-     * Insert a new Habit Log (Completion event)
-     */
+    
     public boolean logHabitCompletion(HabitLog log) {
         String query = "INSERT INTO Habit_Log (HabitID, UserID, CompletionDate, CompletionTime, Notes, XPAwarded, MoodAtCompletion, DifficultyAtCompletion) " +
                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -65,7 +61,7 @@ public class HabitLogDAO {
                 rs.getTime("CompletionTime"),
                 rs.getString("Notes"),
                 rs.getInt("XPAwarded"),
-                rs.getInt("MoodAtCompletion"), // will return 0 if null, but we check if null before setting typically
+                rs.getInt("MoodAtCompletion"), 
                 rs.getFloat("DifficultyAtCompletion"),
                 rs.getBoolean("IsEdited"),
                 rs.getTimestamp("CreatedTimestamp")

@@ -15,12 +15,12 @@ public class User {
     private Timestamp registrationDate;
     private Timestamp lastLoginDate;
     private boolean isActive;
-    private String notificationPreferences; // Stored as JSON string
+    private String notificationPreferences; 
     private boolean aiPredictionEnabled;
     private boolean anomalyDetectionEnabled;
     private boolean adaptiveDifficultyEnabled;
 
-    // Constructors
+    
     public User() {}
 
     public User(long userId, String username, String email, String password, String fullName, String bio, String avatarUrl, int currentLevel, int totalXp, Timestamp registrationDate, Timestamp lastLoginDate, boolean isActive, String notificationPreferences, boolean aiPredictionEnabled, boolean anomalyDetectionEnabled, boolean adaptiveDifficultyEnabled) {
@@ -42,7 +42,7 @@ public class User {
         this.adaptiveDifficultyEnabled = adaptiveDifficultyEnabled;
     }
 
-    // Getters and Setters
+   
     public long getUserId() { return userId; }
     public void setUserId(long userId) { this.userId = userId; }
 

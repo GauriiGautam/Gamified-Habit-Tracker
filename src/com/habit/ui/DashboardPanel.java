@@ -22,17 +22,17 @@ public class DashboardPanel extends JPanel {
         this.habitDAO = new HabitDAO();
 
         setLayout(new BorderLayout());
-        setBackground(new Color(30, 30, 35)); // Modern dark theme
+        setBackground(new Color(30, 30, 35));
 
-        // Header
+       
         JPanel headerPanel = createHeaderPanel();
         add(headerPanel, BorderLayout.NORTH);
 
-        // Sidebar Configuration (Gamification Stats)
+        
         JPanel sidebarPanel = createSidebarPanel();
         add(sidebarPanel, BorderLayout.WEST);
 
-        // Main Content Area
+        
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setOpaque(false);
         contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -52,7 +52,7 @@ public class DashboardPanel extends JPanel {
         
         contentPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Add Habit Button
+        
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         bottomPanel.setOpaque(false);
         JButton addHabitBtn = new JButton("+ Add New Habit");
@@ -108,7 +108,7 @@ public class DashboardPanel extends JPanel {
         xpLabel.setForeground(Color.LIGHT_GRAY);
         xpLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // AI Settings Summary
+        
         JLabel aiLabel = new JLabel("<html><b>AI Services</b><br>LSTM Predictions: " 
             + (currentUser.isAiPredictionEnabled() ? "ON" : "OFF") 
             + "<br>Anomaly Detection: " + (currentUser.isAnomalyDetectionEnabled() ? "ON" : "OFF")
@@ -178,15 +178,15 @@ public class DashboardPanel extends JPanel {
     }
 
     private void openHabitManagement() {
-        // Simple direct prompt for basic addition for the monolith
+       
         String name = JOptionPane.showInputDialog(this, "Enter Habit Name:");
         if (name != null && !name.trim().isEmpty()) {
             Habit newHabit = new Habit();
             newHabit.setUserId(currentUser.getUserId());
             newHabit.setHabitName(name.trim());
-            newHabit.setCategoryId(1); // Default
+            newHabit.setCategoryId(1); 
             newHabit.setFrequency("Daily");
-            newHabit.setDifficultyLevel(2); // Medium
+            newHabit.setDifficultyLevel(2); 
             newHabit.setXpValue(10);
             
             habitDAO.createHabit(newHabit);
@@ -195,13 +195,12 @@ public class DashboardPanel extends JPanel {
     }
 
     private void completeHabit(Habit habit) {
-        // Here we would integrate GamificationService and HabitLogDAO
-        // Simulating the backend hook for UI purposes:
+        
         JOptionPane.showMessageDialog(this, "Logged completion for: " + habit.getHabitName() + "!\n+" + habit.getXpValue() + " XP Awarded.");
         habit.setCurrentStreak(habit.getCurrentStreak() + 1);
         habitDAO.updateHabitProgress(habit.getHabitId(), habit.getCurrentStreak(), Math.max(habit.getCurrentStreak(), habit.getLongestStreak()), habit.getTotalCompletions() + 1);
         
-        // Refresh UI
+        
         loadHabits();
     }
 

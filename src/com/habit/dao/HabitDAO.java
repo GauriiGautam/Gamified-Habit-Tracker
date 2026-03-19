@@ -9,9 +9,6 @@ import java.util.List;
 
 public class HabitDAO {
 
-    /**
-     * Retrieves all habits for a specific user
-     */
     public List<Habit> getHabitsByUserId(long userId) {
         List<Habit> habits = new ArrayList<>();
         String query = "SELECT * FROM Habit WHERE UserID = ? AND IsActive = 'ACTIVE'";
@@ -31,9 +28,7 @@ public class HabitDAO {
         return habits;
     }
 
-    /**
-     * Create a new Habit
-     */
+    
     public boolean createHabit(Habit habit) {
         String query = "INSERT INTO Habit (UserID, CategoryID, HabitName, Description, Frequency, TargetCount, DifficultyLevel, XPValue, IconName, ReminderTime) " +
                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -58,9 +53,7 @@ public class HabitDAO {
         return false;
     }
 
-    /**
-     * Update an existing Habit's streak data
-     */
+    
     public boolean updateHabitProgress(long habitId, int newCurrentStreak, int newLongestStreak, int newTotalCompletions) {
         String query = "UPDATE Habit SET CurrentStreak = ?, LongestStreak = ?, TotalCompletions = ? WHERE HabitID = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
@@ -78,9 +71,7 @@ public class HabitDAO {
         return false;
     }
 
-    /**
-     * Soft delete a habit (Archive it)
-     */
+    
     public boolean archiveHabit(long habitId) {
         String query = "UPDATE Habit SET IsActive = 'ARCHIVED' WHERE HabitID = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
@@ -94,9 +85,7 @@ public class HabitDAO {
         return false;
     }
 
-    /**
-     * Helper to map a ResultSet row to a Habit object
-     */
+    
     private Habit extractHabitFromResultSet(ResultSet rs) throws SQLException {
         return new Habit(
                 rs.getLong("HabitID"),
