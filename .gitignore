@@ -7,7 +7,7 @@ bin/
 
 # Eclipse / VS Code Java project files (machine-specific, don't commit)
 .settings/
-.vscode/
+.vscode/*.code-workspace
 .classpath
 .project
 
