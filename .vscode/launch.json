@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run Gamified Habit Tracker",
+            "request": "launch",
+            "mainClass": "com.habit.main.Main",
+            "projectName": "Miniproj",
+            "classPaths": [
+                "${workspaceFolder}/bin",
+                "${workspaceFolder}/lib/mysql-connector-j-9.6.0.jar"
+            ]
+        }
+    ]
+}
