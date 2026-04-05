@@ -154,6 +154,8 @@ Option A: VS Code (Recommended)
 4. Open src/com/habit/main/Main.java
 5. Click Run button top right
 
+- 🛠️ **Troubleshooting Database Connectivity:** If you see a "MySQL Driver not found" error in VS Code or any IDE, go to your project explorer, click on **Referenced Libraries**, and manually select the `mysql-connector-j-9.6.0.jar` from your PC to connect it to your database.
+
 Option B: Eclipse IDE
 1. Open Eclipse
 2. File → Import → General → Existing Projects into Workspace
@@ -181,6 +183,20 @@ MySQL must be running before starting the app
 Default MySQL username is root
 Only change the PASSWORD field in DBConnection.java
 Java JDK 21 or higher required
+
+📥 How to Download MySQL Connector/J (JDBC Driver)
+Here are the links and steps to get the exact mysql-connector-j-9.6.0.jar file.
+
+🔗 Option 1: Direct Download Link (Fastest)
+Click this link to download the single .jar file directly from the Maven repository:
+👉 [Download mysql-connector-j-9.6.0.jar](https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/9.6.0/mysql-connector-j-9.6.0.jar)
+
+🔗 Option 2: Official MySQL Website
+Go to: https://dev.mysql.com/downloads/connector/j/
+Click "Download"
+Select "Platform Independent" (OS doesn't matter)
+Download the ZIP file
+Extract the .jar file from the ZIP
 
 
 📸 Application Screenshots
