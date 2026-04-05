@@ -1,9 +1,17 @@
 {
+    "java.jdt.ls.java.home": "C:\\Program Files\\Java\\jdk-21",
     "java.project.sourcePaths": [
         "src"
     ],
     "java.project.referencedLibraries": [
-        "lib/mysql-connector-j-9.6.0.jar"
+        "lib/mysql-connector-j-9.0.0.jar"
     ],
-    "java.project.outputPath": "bin"
+    "java.project.outputPath": "bin",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "C:\\Program Files\\Java\\jdk-21",
+            "default": true
+        }
+    ]
 }
