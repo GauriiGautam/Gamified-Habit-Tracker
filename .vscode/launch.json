@@ -9,7 +9,7 @@
             "projectName": "Miniproj",
             "classPaths": [
                 "${workspaceFolder}/bin",
-                "${workspaceFolder}/lib/mysql-connector-j-9.6.0.jar"
+                "${workspaceFolder}/lib/mysql-connector-j-9.0.0.jar"
             ]
         }
     ]

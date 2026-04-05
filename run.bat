@@ -8,7 +8,7 @@ if not exist "bin" mkdir bin
 
 echo Compiling Java files...
 
-javac -cp "lib\mysql-connector-j-9.6.0.jar" -d bin ^
+javac -cp "lib\mysql-connector-j-9.0.0.jar" -d bin ^
 src\com\habit\db\DBConnection.java ^
 src\com\habit\exceptions\HabitException.java ^
 src\com\habit\interfaces\HabitOperations.java ^
@@ -35,6 +35,6 @@ echo.
 echo Compilation Successful!
 echo Starting Application...
 echo.
-java -cp "bin;lib\mysql-connector-j-9.6.0.jar" com.habit.main.Main
+java -cp "bin;lib\mysql-connector-j-9.0.0.jar" com.habit.main.Main
 
 pause
