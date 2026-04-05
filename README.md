@@ -123,44 +123,65 @@ src/com/habit/
 ### Prerequisites:
 - Java JDK 21 or higher
 - MySQL 8.0 or higher
-- Eclipse IDE
-- MySQL Connector/J 9.6.0
+- Git
 
 ### Steps:
 
 #### 1. Clone the Repository
 git clone https://github.com/gaurigautam/Gamified-Habit-Tracker.git
+cd Gamified-Habit-Tracker
 
 #### 2. Setup Database
 ```sql
 CREATE DATABASE HabitTracker;
 USE HabitTracker;
-Run the complete SQL script to create all tables and insert sample data.
+Run the complete SQL script to create all tables and insert sample data provided in repository.
 
 #### 3. Configure Database Connection
-Update `src/com/habit/db/DBConnection.java` with your MySQL credentials:
-```java
-private static final String URL = "jdbc:mysql://localhost:3306/HabitTracker";
-private static final String USER = "root";
+Open this file:
+src/com/habit/db/DBConnection.java
+
+Find this line and update your MySQL password:
 private static final String PASSWORD = "your_password";
+Save the file.
 
-4. Add MySQL Connector JAR
-text
+4. Run the Application
 
-In Eclipse:
-Right click project
-→ Build Path
-→ Configure Build Path
-→ Libraries
-→ Add External JARs
-→ Select mysql-connector-j-9.6.0.jar
+Option A: VS Code (Recommended)
+1. Open folder in VS Code
+2. Install Extension Pack for Java by Microsoft
+3. Wait for Java project to load
+4. Open src/com/habit/main/Main.java
+5. Click Run button top right
 
-5. Run the Application
-text
+Option B: Eclipse IDE
+1. Open Eclipse
+2. File → Import → General → Existing Projects into Workspace
+3. Browse to this project folder
+4. Click Finish
+5. Right click project → Build Path → Configure Build Path
+6. Add External JARs → Select mysql-connector-j-9.6.0.jar
+7. Open src/com/habit/main/Main.java
+8. Right click → Run As → Java Application
 
-Open src/com/habit/main/Main.java
-Press Ctrl + F11 to run
-Login window will appear
+Option C: Terminal
+Windows:
+run.bat
+
+Mac/Linux:
+chmod +x run.sh
+./run.sh
+
+Option D: Double Click Windows
+Double click run.bat file
+Login window will appear!
+
+⚠️ Important Notes:
+MySQL must be running before starting the app
+Default MySQL username is root
+Only change the PASSWORD field in DBConnection.java
+Java JDK 21 or higher required
+
 
 📸 Application Screenshots
 
