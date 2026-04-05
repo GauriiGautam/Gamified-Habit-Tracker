@@ -1,4 +1,16 @@
+# Compiled output
 bin/
 *.class
-.settings/
+
+# Logs
 *.log
+
+# Eclipse / VS Code Java project files (machine-specific, don't commit)
+.settings/
+.vscode/
+.classpath
+.project
+
+# OS junk
+.DS_Store
+Thumbs.db
