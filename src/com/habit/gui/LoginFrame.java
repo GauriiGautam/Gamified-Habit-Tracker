@@ -10,9 +10,9 @@ import java.sql.*;
 
 public class LoginFrame extends JFrame {
 
-    /**
-     * 
-     */
+
+
+
     private static final long serialVersionUID = 1L;
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -32,14 +32,14 @@ public class LoginFrame extends JFrame {
         setResizable(false);
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(new Color(18, 18, 28));
+        mainPanel.setBackground(new Color(30, 30, 30));
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
         JLabel titleLabel = new JLabel("HABIT TRACKER");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
-        titleLabel.setForeground(new Color(99, 102, 241));
+        titleLabel.setForeground(new Color(14, 99, 156));
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
@@ -47,7 +47,7 @@ public class LoginFrame extends JFrame {
 
         JLabel subtitleLabel = new JLabel("Build Better Habits Every Day");
         subtitleLabel.setFont(new Font("Arial", Font.PLAIN, 13));
-        subtitleLabel.setForeground(new Color(150, 150, 180));
+        subtitleLabel.setForeground(new Color(153, 153, 153));
         gbc.gridy = 1;
         mainPanel.add(subtitleLabel, gbc);
 
@@ -65,11 +65,11 @@ public class LoginFrame extends JFrame {
 
         usernameField = new JTextField(20);
         usernameField.setPreferredSize(new Dimension(300, 40));
-        usernameField.setBackground(new Color(30, 30, 50));
+        usernameField.setBackground(new Color(37, 37, 38));
         usernameField.setForeground(Color.WHITE);
         usernameField.setCaretColor(Color.WHITE);
         usernameField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(99, 102, 241), 1),
+                BorderFactory.createLineBorder(new Color(14, 99, 156), 1),
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         usernameField.setFont(new Font("Arial", Font.PLAIN, 14));
         gbc.gridy = 4;
@@ -83,11 +83,11 @@ public class LoginFrame extends JFrame {
 
         passwordField = new JPasswordField(20);
         passwordField.setPreferredSize(new Dimension(300, 40));
-        passwordField.setBackground(new Color(30, 30, 50));
+        passwordField.setBackground(new Color(37, 37, 38));
         passwordField.setForeground(Color.WHITE);
         passwordField.setCaretColor(Color.WHITE);
         passwordField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(99, 102, 241), 1),
+                BorderFactory.createLineBorder(new Color(14, 99, 156), 1),
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         passwordField.setFont(new Font("Arial", Font.PLAIN, 14));
         gbc.gridy = 6;
@@ -95,7 +95,7 @@ public class LoginFrame extends JFrame {
 
         loginButton = new JButton("LOGIN");
         loginButton.setPreferredSize(new Dimension(300, 45));
-        loginButton.setBackground(new Color(99, 102, 241));
+        loginButton.setBackground(new Color(14, 99, 156));
         loginButton.setForeground(Color.WHITE);
         loginButton.setFont(new Font("Arial", Font.BOLD, 15));
         loginButton.setBorderPainted(false);
@@ -106,8 +106,8 @@ public class LoginFrame extends JFrame {
         mainPanel.add(loginButton, gbc);
 
         registerButton = new JButton("New User? Register Here");
-        registerButton.setBackground(new Color(18, 18, 28));
-        registerButton.setForeground(new Color(99, 102, 241));
+        registerButton.setBackground(new Color(30, 30, 30));
+        registerButton.setForeground(new Color(14, 99, 156));
         registerButton.setFont(new Font("Arial", Font.PLAIN, 12));
         registerButton.setBorderPainted(false);
         registerButton.setFocusPainted(false);

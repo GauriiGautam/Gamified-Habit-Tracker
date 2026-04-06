@@ -10,9 +10,6 @@ import com.habit.db.DBConnection;
 
 public class AddHabitFrame extends JFrame {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 1L;
     private int userId;
     private DashboardFrame dashboard;
@@ -42,7 +39,7 @@ public class AddHabitFrame extends JFrame {
         setResizable(false);
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(new Color(18, 18, 28));
+        mainPanel.setBackground(new Color(30, 30, 30));
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 15, 8, 15);
@@ -50,7 +47,7 @@ public class AddHabitFrame extends JFrame {
 
         JLabel titleLabel = new JLabel("ADD NEW HABIT");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
-        titleLabel.setForeground(new Color(99, 102, 241));
+        titleLabel.setForeground(new Color(14, 99, 156));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -104,12 +101,12 @@ public class AddHabitFrame extends JFrame {
         gbc.gridx = 0;
         mainPanel.add(createLabel("Description:"), gbc);
         descriptionArea = new JTextArea(3, 15);
-        descriptionArea.setBackground(new Color(30, 30, 50));
+        descriptionArea.setBackground(new Color(37, 37, 38));
         descriptionArea.setForeground(Color.WHITE);
         descriptionArea.setCaretColor(Color.WHITE);
         descriptionArea.setFont(new Font("Arial", Font.PLAIN, 13));
         descriptionArea.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(99, 102, 241), 1),
+                BorderFactory.createLineBorder(new Color(14, 99, 156), 1),
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         JScrollPane descScroll = new JScrollPane(descriptionArea);
         gbc.gridx = 1;
@@ -117,7 +114,7 @@ public class AddHabitFrame extends JFrame {
 
         addButton = new JButton("ADD HABIT");
         addButton.setPreferredSize(new Dimension(200, 42));
-        addButton.setBackground(new Color(99, 102, 241));
+        addButton.setBackground(new Color(14, 99, 156));
         addButton.setForeground(Color.WHITE);
         addButton.setFont(new Font("Arial", Font.BOLD, 14));
         addButton.setBorderPainted(false);
@@ -126,7 +123,7 @@ public class AddHabitFrame extends JFrame {
 
         cancelButton = new JButton("Cancel");
         cancelButton.setPreferredSize(new Dimension(200, 42));
-        cancelButton.setBackground(new Color(60, 60, 80));
+        cancelButton.setBackground(new Color(85, 85, 85));
         cancelButton.setForeground(Color.WHITE);
         cancelButton.setFont(new Font("Arial", Font.BOLD, 14));
         cancelButton.setBorderPainted(false);
@@ -134,7 +131,7 @@ public class AddHabitFrame extends JFrame {
         cancelButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
-        buttonPanel.setBackground(new Color(18, 18, 28));
+        buttonPanel.setBackground(new Color(30, 30, 30));
         buttonPanel.add(addButton);
         buttonPanel.add(cancelButton);
 
@@ -215,18 +212,18 @@ public class AddHabitFrame extends JFrame {
     private JTextField createTextField() {
         JTextField field = new JTextField(15);
         field.setPreferredSize(new Dimension(200, 35));
-        field.setBackground(new Color(30, 30, 50));
+        field.setBackground(new Color(37, 37, 38));
         field.setForeground(Color.WHITE);
         field.setCaretColor(Color.WHITE);
         field.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(99, 102, 241), 1),
+                BorderFactory.createLineBorder(new Color(14, 99, 156), 1),
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         field.setFont(new Font("Arial", Font.PLAIN, 13));
         return field;
     }
 
     private void styleCombo(JComboBox<String> combo) {
-        combo.setBackground(new Color(30, 30, 50));
+        combo.setBackground(new Color(37, 37, 38));
         combo.setForeground(Color.WHITE);
         combo.setFont(new Font("Arial", Font.PLAIN, 13));
         combo.setPreferredSize(new Dimension(200, 35));

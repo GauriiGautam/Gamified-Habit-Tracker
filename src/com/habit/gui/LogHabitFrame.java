@@ -5,10 +5,10 @@ import com.habit.db.DBConnection;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 public class LogHabitFrame extends JFrame {
 
@@ -40,35 +40,35 @@ public class LogHabitFrame extends JFrame {
         setResizable(false);
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(new Color(18, 18, 28));
+        mainPanel.setBackground(new Color(30, 30, 30));
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 15, 10, 15);
         gbc.fill   = GridBagConstraints.HORIZONTAL;
 
-        // ── Title ─────────────────────────────────────────────────
-        JLabel titleLabel = new JLabel("✅  LOG HABIT COMPLETION");
+
+        JLabel titleLabel = new JLabel("LOG HABIT COMPLETION");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        titleLabel.setForeground(new Color(99, 102, 241));
+        titleLabel.setForeground(new Color(14, 99, 156));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
         mainPanel.add(titleLabel, gbc);
 
         gbc.gridwidth = 1;
 
-        // ── Habit select ──────────────────────────────────────────
+
         gbc.gridy = 1; gbc.gridx = 0;
         mainPanel.add(createLabel("Select Habit:"), gbc);
 
         habitCombo = new JComboBox<>();
-        habitCombo.setBackground(new Color(30, 30, 50));
+        habitCombo.setBackground(new Color(37, 37, 38));
         habitCombo.setForeground(Color.WHITE);
         habitCombo.setFont(new Font("Arial", Font.PLAIN, 13));
         habitCombo.setPreferredSize(new Dimension(210, 36));
         gbc.gridx = 1;
         mainPanel.add(habitCombo, gbc);
 
-        // XP hint label — updates when habit selection changes
+
         xpHintLabel = new JLabel(" ");
         xpHintLabel.setFont(new Font("Arial", Font.ITALIC, 11));
         xpHintLabel.setForeground(new Color(99, 180, 99));
@@ -79,17 +79,17 @@ public class LogHabitFrame extends JFrame {
 
         habitCombo.addActionListener(e -> updateXpHint());
 
-        // ── Date ──────────────────────────────────────────────────
+
         gbc.gridy = 3; gbc.gridx = 0;
         mainPanel.add(createLabel("Date:"), gbc);
 
         dateField = new JTextField(LocalDate.now().toString());
         dateField.setPreferredSize(new Dimension(210, 36));
-        dateField.setBackground(new Color(30, 30, 50));
+        dateField.setBackground(new Color(37, 37, 38));
         dateField.setForeground(Color.WHITE);
         dateField.setCaretColor(Color.WHITE);
         dateField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(99, 102, 241), 1),
+            BorderFactory.createLineBorder(new Color(14, 99, 156), 1),
             BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         dateField.setFont(new Font("Arial", Font.PLAIN, 13));
         dateField.setToolTipText("Format: YYYY-MM-DD (today's date is pre-filled)");
@@ -98,23 +98,23 @@ public class LogHabitFrame extends JFrame {
 
         JLabel dateHint = new JLabel("Format: YYYY-MM-DD  (today is pre-filled)");
         dateHint.setFont(new Font("Arial", Font.ITALIC, 11));
-        dateHint.setForeground(new Color(150, 150, 180));
+        dateHint.setForeground(new Color(153, 153, 153));
         dateHint.setHorizontalAlignment(SwingConstants.CENTER);
         gbc.gridy = 4; gbc.gridx = 0; gbc.gridwidth = 2;
         mainPanel.add(dateHint, gbc);
         gbc.gridwidth = 1;
 
-        // ── Notes ─────────────────────────────────────────────────
+
         gbc.gridy = 5; gbc.gridx = 0;
         mainPanel.add(createLabel("Notes (optional):"), gbc);
 
         notesArea = new JTextArea(4, 15);
-        notesArea.setBackground(new Color(30, 30, 50));
+        notesArea.setBackground(new Color(37, 37, 38));
         notesArea.setForeground(Color.WHITE);
         notesArea.setCaretColor(Color.WHITE);
         notesArea.setFont(new Font("Arial", Font.PLAIN, 13));
         notesArea.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(99, 102, 241), 1),
+            BorderFactory.createLineBorder(new Color(14, 99, 156), 1),
             BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         notesArea.setLineWrap(true);
         notesArea.setWrapStyleWord(true);
@@ -122,10 +122,10 @@ public class LogHabitFrame extends JFrame {
         gbc.gridx = 1;
         mainPanel.add(notesScroll, gbc);
 
-        // ── Buttons ───────────────────────────────────────────────
-        logButton = new JButton("✅  LOG HABIT");
+
+        logButton = new JButton("LOG HABIT");
         logButton.setPreferredSize(new Dimension(180, 44));
-        logButton.setBackground(new Color(40, 167, 69));
+        logButton.setBackground(new Color(52, 168, 83));
         logButton.setForeground(Color.WHITE);
         logButton.setFont(new Font("Arial", Font.BOLD, 14));
         logButton.setBorderPainted(false);
@@ -134,7 +134,7 @@ public class LogHabitFrame extends JFrame {
 
         cancelButton = new JButton("Cancel");
         cancelButton.setPreferredSize(new Dimension(120, 44));
-        cancelButton.setBackground(new Color(60, 60, 80));
+        cancelButton.setBackground(new Color(85, 85, 85));
         cancelButton.setForeground(Color.WHITE);
         cancelButton.setFont(new Font("Arial", Font.BOLD, 14));
         cancelButton.setBorderPainted(false);
@@ -142,7 +142,7 @@ public class LogHabitFrame extends JFrame {
         cancelButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
-        btnPanel.setBackground(new Color(18, 18, 28));
+        btnPanel.setBackground(new Color(30, 30, 30));
         btnPanel.add(logButton);
         btnPanel.add(cancelButton);
 
@@ -184,13 +184,13 @@ public class LogHabitFrame extends JFrame {
     private void updateXpHint() {
         String item = (String) habitCombo.getSelectedItem();
         if (item == null) return;
-        // Extract XP from format "ID — Name  (+N XP)"
+
         try {
             int start = item.lastIndexOf("(+") + 2;
             int end   = item.lastIndexOf(" XP)");
             if (start > 1 && end > start) {
                 int xp = Integer.parseInt(item.substring(start, end).trim());
-                xpHintLabel.setText("🎯 Completing this habit will earn you +" + xp + " XP!");
+                xpHintLabel.setText("Completing this habit will earn you +" + xp + " XP!");
             }
         } catch (NumberFormatException ignored) { xpHintLabel.setText(" "); }
     }
@@ -203,7 +203,7 @@ public class LogHabitFrame extends JFrame {
             return;
         }
 
-        // Parse habit ID
+
         int habitId;
         try {
             habitId = Integer.parseInt(habitStr.split(" — ")[0].trim());
@@ -212,7 +212,7 @@ public class LogHabitFrame extends JFrame {
             return;
         }
 
-        // Validate date
+
         String date = dateField.getText().trim();
         try {
             LocalDate parsed = LocalDate.parse(date);
@@ -230,13 +230,22 @@ public class LogHabitFrame extends JFrame {
         String notes = notesArea.getText().trim();
         if (notes.isEmpty()) notes = null;
 
-        dao.logHabit(habitId, userId, date, notes);
+        List<String> newlyEarned = dao.logHabit(habitId, userId, date, notes);
 
         JOptionPane.showMessageDialog(this,
-            "<html><b>Habit logged! 🎉</b><br>XP has been added to your account.</html>",
+            "<html><b>Habit logged!</b><br>XP has been added to your account.</html>",
             "Logged!", JOptionPane.INFORMATION_MESSAGE);
 
-        dashboard.refreshHabits();   // refreshes table + XP header
+        if (newlyEarned != null && !newlyEarned.isEmpty()) {
+            StringBuilder sb = new StringBuilder("<html><b>Congratulations! You earned new badges:</b><ul>");
+            for (String b : newlyEarned) {
+                sb.append("<li>").append(b).append("</li>");
+            }
+            sb.append("</ul></html>");
+            JOptionPane.showMessageDialog(this, sb.toString(), "Badge Unlocked!", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        dashboard.refreshHabits();
         dispose();
     }
 

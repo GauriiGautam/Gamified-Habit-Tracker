@@ -10,7 +10,7 @@ public class RegisterFrame extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    // User ID is now auto-generated — not shown to the user
+
     private JTextField usernameField;
     private JTextField emailField;
     private JPasswordField passwordField;
@@ -34,30 +34,30 @@ public class RegisterFrame extends JFrame {
         setResizable(false);
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(new Color(18, 18, 28));
+        mainPanel.setBackground(new Color(30, 30, 30));
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 10, 8, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // ── Title ──────────────────────────────────────────────────
+
         JLabel titleLabel = new JLabel("CREATE ACCOUNT");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 26));
-        titleLabel.setForeground(new Color(99, 102, 241));
+        titleLabel.setForeground(new Color(14, 99, 156));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
         mainPanel.add(titleLabel, gbc);
 
         JLabel subtitleLabel = new JLabel("Start your habit journey today!");
         subtitleLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        subtitleLabel.setForeground(new Color(150, 150, 180));
+        subtitleLabel.setForeground(new Color(153, 153, 153));
         subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gbc.gridy = 1;
         mainPanel.add(subtitleLabel, gbc);
 
         gbc.gridwidth = 1;
 
-        // ── Full Name ───────────────────────────────────────────────
+
         gbc.gridy = 2; gbc.gridx = 0;
         mainPanel.add(createLabel("Full Name: *"), gbc);
         fullNameField = createTextField();
@@ -65,7 +65,7 @@ public class RegisterFrame extends JFrame {
         gbc.gridx = 1;
         mainPanel.add(fullNameField, gbc);
 
-        // ── Username ────────────────────────────────────────────────
+
         gbc.gridy = 3; gbc.gridx = 0;
         mainPanel.add(createLabel("Username: *"), gbc);
         usernameField = createTextField();
@@ -73,7 +73,7 @@ public class RegisterFrame extends JFrame {
         gbc.gridx = 1;
         mainPanel.add(usernameField, gbc);
 
-        // ── Email ───────────────────────────────────────────────────
+
         gbc.gridy = 4; gbc.gridx = 0;
         mainPanel.add(createLabel("Email: *"), gbc);
         emailField = createTextField();
@@ -81,7 +81,7 @@ public class RegisterFrame extends JFrame {
         gbc.gridx = 1;
         mainPanel.add(emailField, gbc);
 
-        // ── Password ────────────────────────────────────────────────
+
         gbc.gridy = 5; gbc.gridx = 0;
         mainPanel.add(createLabel("Password: *"), gbc);
         passwordField = new JPasswordField(15);
@@ -90,7 +90,7 @@ public class RegisterFrame extends JFrame {
         gbc.gridx = 1;
         mainPanel.add(passwordField, gbc);
 
-        // ── Confirm Password ────────────────────────────────────────
+
         gbc.gridy = 6; gbc.gridx = 0;
         mainPanel.add(createLabel("Confirm Password: *"), gbc);
         confirmPasswordField = new JPasswordField(15);
@@ -99,7 +99,7 @@ public class RegisterFrame extends JFrame {
         gbc.gridx = 1;
         mainPanel.add(confirmPasswordField, gbc);
 
-        // ── Bio (optional) ──────────────────────────────────────────
+
         gbc.gridy = 7; gbc.gridx = 0;
         mainPanel.add(createLabel("Bio (optional):"), gbc);
         bioField = createTextField();
@@ -107,19 +107,19 @@ public class RegisterFrame extends JFrame {
         gbc.gridx = 1;
         mainPanel.add(bioField, gbc);
 
-        // ── Required note ───────────────────────────────────────────
+
         JLabel requiredNote = new JLabel("* Required fields");
         requiredNote.setFont(new Font("Arial", Font.ITALIC, 11));
-        requiredNote.setForeground(new Color(150, 150, 180));
+        requiredNote.setForeground(new Color(153, 153, 153));
         requiredNote.setHorizontalAlignment(SwingConstants.CENTER);
         gbc.gridy = 8; gbc.gridx = 0; gbc.gridwidth = 2;
         gbc.insets = new Insets(0, 10, 4, 10);
         mainPanel.add(requiredNote, gbc);
 
-        // ── Register Button ─────────────────────────────────────────
+
         registerButton = new JButton("CREATE MY ACCOUNT");
         registerButton.setPreferredSize(new Dimension(320, 46));
-        registerButton.setBackground(new Color(99, 102, 241));
+        registerButton.setBackground(new Color(14, 99, 156));
         registerButton.setForeground(Color.WHITE);
         registerButton.setFont(new Font("Arial", Font.BOLD, 15));
         registerButton.setBorderPainted(false);
@@ -129,10 +129,10 @@ public class RegisterFrame extends JFrame {
         gbc.insets = new Insets(12, 10, 5, 10);
         mainPanel.add(registerButton, gbc);
 
-        // ── Back Button ─────────────────────────────────────────────
+
         backButton = new JButton("Already have an account? Login");
-        backButton.setBackground(new Color(18, 18, 28));
-        backButton.setForeground(new Color(99, 102, 241));
+        backButton.setBackground(new Color(30, 30, 30));
+        backButton.setForeground(new Color(14, 99, 156));
         backButton.setFont(new Font("Arial", Font.PLAIN, 12));
         backButton.setBorderPainted(false);
         backButton.setFocusPainted(false);
@@ -141,27 +141,27 @@ public class RegisterFrame extends JFrame {
         gbc.insets = new Insets(2, 10, 10, 10);
         mainPanel.add(backButton, gbc);
 
-        // ── Listeners ───────────────────────────────────────────────
+
         registerButton.addActionListener(e -> handleRegister());
         backButton.addActionListener(e -> {
             new LoginFrame().setVisible(true);
             dispose();
         });
 
-        // Allow Enter key to submit from confirm password field
+
         confirmPasswordField.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) handleRegister();
             }
         });
 
-        // Hover effect on register button
+
         registerButton.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 registerButton.setBackground(new Color(79, 82, 221));
             }
             public void mouseExited(MouseEvent e) {
-                registerButton.setBackground(new Color(99, 102, 241));
+                registerButton.setBackground(new Color(14, 99, 156));
             }
         });
 
@@ -176,7 +176,7 @@ public class RegisterFrame extends JFrame {
         String confirmPwd = new String(confirmPasswordField.getPassword()).trim();
         String bio      = bioField.getText().trim();
 
-        // ── Validation ──────────────────────────────────────────────
+
         if (fullName.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             showError("Please fill all required fields (*).");
             return;
@@ -209,11 +209,11 @@ public class RegisterFrame extends JFrame {
             return;
         }
 
-        // ── Auto-generate User ID ────────────────────────────────────
+
         int userId = dao.getNextUserId();
 
-        // ── Register ─────────────────────────────────────────────────
-        // All new users start at Level 1 (Beginner)
+
+
         dao.addUser(userId, username, email, password, fullName, bio, 1);
 
         JOptionPane.showMessageDialog(this,
@@ -245,22 +245,22 @@ public class RegisterFrame extends JFrame {
 
     private void styleTextField(JTextField field) {
         field.setPreferredSize(new Dimension(210, 36));
-        field.setBackground(new Color(30, 30, 50));
+        field.setBackground(new Color(37, 37, 38));
         field.setForeground(Color.WHITE);
         field.setCaretColor(Color.WHITE);
         field.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(99, 102, 241), 1),
+                BorderFactory.createLineBorder(new Color(14, 99, 156), 1),
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         field.setFont(new Font("Arial", Font.PLAIN, 13));
     }
 
     private void stylePasswordField(JPasswordField field) {
         field.setPreferredSize(new Dimension(210, 36));
-        field.setBackground(new Color(30, 30, 50));
+        field.setBackground(new Color(37, 37, 38));
         field.setForeground(Color.WHITE);
         field.setCaretColor(Color.WHITE);
         field.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(99, 102, 241), 1),
+                BorderFactory.createLineBorder(new Color(14, 99, 156), 1),
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         field.setFont(new Font("Arial", Font.PLAIN, 13));
     }
