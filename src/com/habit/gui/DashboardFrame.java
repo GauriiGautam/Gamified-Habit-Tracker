@@ -1,6 +1,7 @@
 package com.habit.gui;
 
 import com.habit.dao.HabitDAO;
+import com.habit.dao.MoodDAO;
 import com.habit.db.DBConnection;
 
 import javax.swing.*;
@@ -10,6 +11,10 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableRowSorter;
+import javax.swing.RowFilter;
 
 public class DashboardFrame extends JFrame {
 
@@ -18,6 +23,7 @@ public class DashboardFrame extends JFrame {
     private int userId;
     private String fullName;
     private HabitDAO dao;
+    private MoodDAO moodDao;
 
 
     private JLabel welcomeLabel;
@@ -38,6 +44,7 @@ public class DashboardFrame extends JFrame {
         this.userId   = userId;
         this.fullName = fullName;
         this.dao      = new HabitDAO();
+        this.moodDao  = new MoodDAO();
         initUI();
         showHabitsSection();
         loadUserStats();
@@ -221,24 +228,50 @@ public class DashboardFrame extends JFrame {
             }
         } catch (SQLException e) { showDbError(e); }
 
+        JTextField searchField = new JTextField(15);
+        searchField.setBackground(new Color(37, 37, 38));
+        searchField.setForeground(Color.WHITE);
+        searchField.setCaretColor(Color.WHITE);
+        searchField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(60, 60, 60)), 
+            BorderFactory.createEmptyBorder(5, 5, 5, 5)
+        ));
+
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tableModel);
+        dataTable.setRowSorter(sorter);
+
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) { filter(); }
+            public void removeUpdate(DocumentEvent e) { filter(); }
+            public void changedUpdate(DocumentEvent e) { filter(); }
+            private void filter() {
+                String text = searchField.getText();
+                if (text.trim().length() == 0) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+        });
+
+        JLabel searchLabel = new JLabel("Search Habit: ");
+        searchLabel.setForeground(Color.WHITE);
+
         setActionPanel(
             makeButton("Refresh",        new Color(85, 85, 85),   ev -> showHabitsSection()),
-            makeButton("Rename Habit",   new Color(14, 99, 156), ev -> handleRenameHabit()),
-            makeButton("Delete Habit",   new Color(211, 47, 47),  ev -> handleDeleteHabit())
+            makeButton("Update Habit",   new Color(14, 99, 156), ev -> handleUpdateHabit()),
+            makeButton("Delete Habit",   new Color(211, 47, 47),  ev -> handleDeleteHabit()),
+            Box.createHorizontalStrut(20),
+            searchLabel,
+            searchField
         );
     }
 
-    private void handleRenameHabit() {
+    private void handleUpdateHabit() {
         int row = dataTable.getSelectedRow();
         if (row < 0) { showSelectRowWarning(); return; }
-        int    habitId     = (int)    tableModel.getValueAt(row, 0);
-        String currentName = (String) tableModel.getValueAt(row, 1);
-        String newName = JOptionPane.showInputDialog(this,
-                "Enter a new name for the habit:", currentName);
-        if (newName != null && !newName.trim().isEmpty()) {
-            dao.updateHabit(habitId, newName.trim());
-            showHabitsSection();
-        }
+        int habitId = (int) tableModel.getValueAt(row, 0);
+        new AddHabitFrame(userId, this, habitId).setVisible(true);
     }
 
     private void handleDeleteHabit() {
@@ -583,7 +616,7 @@ public class DashboardFrame extends JFrame {
         p.add(btnRow, gc);
 
         saveBtn.addActionListener(e -> {
-            boolean added = dao.addMoodEntry(userId, slider.getValue(),
+            boolean added = moodDao.addMoodEntry(userId, slider.getValue(),
                     (String) moodCombo.getSelectedItem(), notesField.getText().trim());
             if (added) {
                 JOptionPane.showMessageDialog(dlg, "Mood saved!", "Saved",
@@ -663,7 +696,7 @@ public class DashboardFrame extends JFrame {
         p.add(btnRow, gc);
 
         saveBtn.addActionListener(e -> {
-            boolean ok = dao.updateMoodEntry(moodId, userId, slider.getValue(),
+            boolean ok = moodDao.updateMoodEntry(moodId, userId, slider.getValue(),
                     (String) moodCombo.getSelectedItem(), notesField.getText().trim());
             if (ok) {
                 JOptionPane.showMessageDialog(dlg, "Mood updated!", "Updated",
@@ -690,7 +723,7 @@ public class DashboardFrame extends JFrame {
                 "Delete mood entry for " + date + "?",
                 "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (confirm == JOptionPane.YES_OPTION) {
-            if (dao.deleteMoodEntry(moodId, userId)) {
+            if (moodDao.deleteMoodEntry(moodId, userId)) {
                 loadMoodData();
             } else {
                 JOptionPane.showMessageDialog(this, "Could not delete entry.", "Error",
@@ -744,9 +777,9 @@ public class DashboardFrame extends JFrame {
         });
     }
 
-    private void setActionPanel(JButton... buttons) {
+    private void setActionPanel(Component... components) {
         actionPanel.removeAll();
-        for (JButton btn : buttons) actionPanel.add(btn);
+        for (Component c : components) actionPanel.add(c);
         actionPanel.revalidate();
         actionPanel.repaint();
     }

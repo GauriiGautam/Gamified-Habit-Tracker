@@ -22,6 +22,8 @@ public class AddHabitFrame extends JFrame {
     private JTextField xpField;
     private JButton addButton;
     private JButton cancelButton;
+    private JLabel titleLabel;
+    private int editHabitId = -1;
 
     public AddHabitFrame(int userId, DashboardFrame dashboard) {
         this.userId = userId;
@@ -29,6 +31,16 @@ public class AddHabitFrame extends JFrame {
         this.dao = new HabitDAO();
         initUI();
         loadCategories();
+    }
+
+    public AddHabitFrame(int userId, DashboardFrame dashboard, int habitId) {
+        this.userId = userId;
+        this.dashboard = dashboard;
+        this.dao = new HabitDAO();
+        this.editHabitId = habitId;
+        initUI();
+        loadCategories();
+        loadHabitData();
     }
 
     private void initUI() {
@@ -45,7 +57,7 @@ public class AddHabitFrame extends JFrame {
         gbc.insets = new Insets(8, 15, 8, 15);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel titleLabel = new JLabel("ADD NEW HABIT");
+        titleLabel = new JLabel(editHabitId == -1 ? "ADD NEW HABIT" : "UPDATE HABIT");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
         titleLabel.setForeground(new Color(14, 99, 156));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -112,7 +124,7 @@ public class AddHabitFrame extends JFrame {
         gbc.gridx = 1;
         mainPanel.add(descScroll, gbc);
 
-        addButton = new JButton("ADD HABIT");
+        addButton = new JButton(editHabitId == -1 ? "ADD HABIT" : "UPDATE HABIT");
         addButton.setPreferredSize(new Dimension(200, 42));
         addButton.setBackground(new Color(14, 99, 156));
         addButton.setForeground(Color.WHITE);
@@ -170,6 +182,32 @@ public class AddHabitFrame extends JFrame {
         }
     }
 
+    private void loadHabitData() {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String sql = "SELECT HabitName, CategoryID, Frequency, DifficultyLevel, XPValue FROM HABIT WHERE HabitID = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, editHabitId);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                habitNameField.setText(rs.getString("HabitName"));
+                frequencyCombo.setSelectedItem(rs.getString("Frequency"));
+                difficultyCombo.setSelectedIndex(rs.getInt("DifficultyLevel") - 1);
+                xpField.setText(String.valueOf(rs.getInt("XPValue")));
+                
+                int catId = rs.getInt("CategoryID");
+                for (int i = 0; i < categoryCombo.getItemCount(); i++) {
+                    if (categoryCombo.getItemAt(i).startsWith(catId + " - ")) {
+                        categoryCombo.setSelectedIndex(i);
+                        break;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error loading habit data: " + e.getMessage());
+        }
+    }
+
     private void handleAddHabit() {
         try {
             String habitName = habitNameField.getText().trim();
@@ -186,11 +224,14 @@ public class AddHabitFrame extends JFrame {
             int difficulty = difficultyCombo.getSelectedIndex() + 1;
             int xpValue = Integer.parseInt(xpField.getText().trim());
 
-            dao.addHabit(userId, categoryId, habitName, frequency, difficulty, xpValue);
-
-            JOptionPane.showMessageDialog(this,
-                    "Habit '" + habitName + "' added successfully!",
-                    "Success", JOptionPane.INFORMATION_MESSAGE);
+            if (editHabitId == -1) {
+                dao.addHabit(userId, categoryId, habitName, frequency, difficulty, xpValue);
+                JOptionPane.showMessageDialog(this, "Habit '" + habitName + "' added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                String catName = categoryStr.split(" - ")[1];
+                dao.updateFullHabit(editHabitId, habitName, catName, frequency, 1, difficulty);
+                JOptionPane.showMessageDialog(this, "Habit '" + habitName + "' updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
 
             dashboard.refreshHabits();
             dispose();

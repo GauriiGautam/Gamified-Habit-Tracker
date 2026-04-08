@@ -7,6 +7,8 @@ public interface HabitOperations {
 
     void updateHabit(int habitId, String newName);
 
+    void updateFullHabit(int habitId, String name, String category, String frequency, int target, int difficulty);
+
     void deleteHabit(int habitId);
 
     void viewHabitsByUser(int userId);

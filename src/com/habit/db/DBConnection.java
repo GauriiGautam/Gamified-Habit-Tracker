@@ -8,7 +8,7 @@ public class DBConnection {
 
     private static final String URL = "jdbc:mysql://localhost:3306/HabitTracker";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "your_password";
+    private static final String PASSWORD = "Rachit17$";
 
     private static Connection connection = null;
 

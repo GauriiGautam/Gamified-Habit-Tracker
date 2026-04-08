@@ -1,6 +1,6 @@
 package com.habit.gui;
 
-import com.habit.dao.HabitDAO;
+import com.habit.dao.UserDAO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,10 +19,10 @@ public class RegisterFrame extends JFrame {
     private JTextField bioField;
     private JButton registerButton;
     private JButton backButton;
-    private HabitDAO dao;
+    private UserDAO dao;
 
     public RegisterFrame() {
-        dao = new HabitDAO();
+        dao = new UserDAO();
         initUI();
     }
 
@@ -210,11 +210,7 @@ public class RegisterFrame extends JFrame {
         }
 
 
-        int userId = dao.getNextUserId();
-
-
-
-        dao.addUser(userId, username, email, password, fullName, bio, 1);
+        dao.registerUser(username, password, email, fullName, bio);
 
         JOptionPane.showMessageDialog(this,
                 "<html><b>Welcome, " + fullName + "!</b><br>"

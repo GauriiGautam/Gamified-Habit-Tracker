@@ -1,6 +1,6 @@
 package com.habit.gui;
 
-import com.habit.dao.HabitDAO;
+import com.habit.dao.UserDAO;
 import com.habit.db.DBConnection;
 
 import javax.swing.*;
@@ -19,8 +19,10 @@ public class LoginFrame extends JFrame {
     private JButton loginButton;
     private JButton registerButton;
 
+    private UserDAO dao;
+
     public LoginFrame() {
-        new HabitDAO();
+        dao = new UserDAO();
         initUI();
     }
 
@@ -151,30 +153,16 @@ public class LoginFrame extends JFrame {
         }
 
         try {
-            Connection conn = DBConnection.getConnection();
-            String sql = "SELECT UserID, FullName FROM USER WHERE Username = ? AND Password = ?";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, username);
-            pst.setString(2, password);
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                int userId = rs.getInt("UserID");
-                String fullName = rs.getString("FullName");
-                JOptionPane.showMessageDialog(this,
-                        "Welcome back, " + fullName + "!",
-                        "Login Successful", JOptionPane.INFORMATION_MESSAGE);
-                new DashboardFrame(userId, fullName).setVisible(true);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this,
-                        "Invalid username or password!",
-                        "Login Failed", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (SQLException e) {
+            com.habit.model.User user = dao.loginUser(username, password);
             JOptionPane.showMessageDialog(this,
-                    "Database error: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
+                    "Welcome back, " + user.getFullName() + "!",
+                    "Login Successful", JOptionPane.INFORMATION_MESSAGE);
+            new DashboardFrame(user.getUserId(), user.getFullName()).setVisible(true);
+            dispose();
+        } catch (com.habit.exceptions.InvalidAuthenticationException e) {
+            JOptionPane.showMessageDialog(this,
+                    e.getMessage(),
+                    "Login Failed", JOptionPane.ERROR_MESSAGE);
         }
     }
 
