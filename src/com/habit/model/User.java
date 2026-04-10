@@ -9,7 +9,7 @@ public class User {
     private String fullName;
     private String bio;
     protected int currentLevel;
-    private int totalXP;
+    protected int totalXP;
     private String registrationDate;
     private int isActive;
 

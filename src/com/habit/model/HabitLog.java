@@ -7,7 +7,7 @@ public class HabitLog {
     private int userId;
     private String completionDate;
     private String completionTime;
-    private String notes;
+    protected String notes;
     private int xpAwarded;
 
     public HabitLog() {

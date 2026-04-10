@@ -5,7 +5,7 @@ public class Habit {
     private int habitId;
     private int userId;
     private int categoryId;
-    private String habitName;
+    protected String habitName;
     private String description;
     private String frequency;
     private int targetCount;
