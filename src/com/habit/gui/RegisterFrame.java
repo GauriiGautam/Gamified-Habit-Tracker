@@ -86,7 +86,7 @@ public class RegisterFrame extends JFrame {
         mainPanel.add(createLabel("Password: *"), gbc);
         passwordField = new JPasswordField(15);
         stylePasswordField(passwordField);
-        passwordField.setToolTipText("Minimum 6 characters");
+        passwordField.setToolTipText("Min 6 chars, 1 uppercase, 1 lowercase, 1 number, no spaces");
         gbc.gridx = 1;
         mainPanel.add(passwordField, gbc);
 
@@ -197,8 +197,28 @@ public class RegisterFrame extends JFrame {
             return;
         }
 
+        if (password.contains(" ")) {
+            showError("Password cannot contain spaces.");
+            return;
+        }
+
         if (password.length() < 6) {
             showError("Password must be at least 6 characters.");
+            return;
+        }
+
+        if (!password.matches(".*[A-Z].*")) {
+            showError("Password must contain at least one uppercase letter.");
+            return;
+        }
+
+        if (!password.matches(".*[a-z].*")) {
+            showError("Password must contain at least one lowercase letter.");
+            return;
+        }
+
+        if (!password.matches(".*\\d.*")) {
+            showError("Password must contain at least one number.");
             return;
         }
 
