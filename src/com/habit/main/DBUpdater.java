@@ -22,8 +22,24 @@ public class DBUpdater {
             PreparedStatement p3 = conn.prepareStatement(updateBadge3); p3.executeUpdate(); p3.close();
             PreparedStatement p4 = conn.prepareStatement(updateBadge4); p4.executeUpdate(); p4.close();
             PreparedStatement p5 = conn.prepareStatement(updateBadge5); p5.executeUpdate(); p5.close();
+
+            // Lower XP requirements for faster real-time level ups
+            String updateLvl1 = "UPDATE LEVEL SET XPRequired = 0 WHERE LevelID = 1";
+            String updateLvl2 = "UPDATE LEVEL SET XPRequired = 100 WHERE LevelID = 2";
+            String updateLvl3 = "UPDATE LEVEL SET XPRequired = 250 WHERE LevelID = 3";
+            String updateLvl4 = "UPDATE LEVEL SET XPRequired = 500 WHERE LevelID = 4";
+            String updateLvl5 = "UPDATE LEVEL SET XPRequired = 1000 WHERE LevelID = 5";
+            conn.createStatement().executeUpdate(updateLvl1);
+            conn.createStatement().executeUpdate(updateLvl2);
+            conn.createStatement().executeUpdate(updateLvl3);
+            conn.createStatement().executeUpdate(updateLvl4);
+            conn.createStatement().executeUpdate(updateLvl5);
+
+            // Re-sync all users to their correct new levels based on lowered thresholds
+            String syncUsers = "UPDATE USER u SET CurrentLevel = (SELECT LevelID FROM LEVEL WHERE XPRequired <= u.TotalXP ORDER BY XPRequired DESC LIMIT 1)";
+            conn.createStatement().executeUpdate(syncUsers);
             
-            System.out.println("Badges updated successfully!");
+            System.out.println("Badges and Levels updated successfully!");
             
         } catch (Exception e) {
             e.printStackTrace();

@@ -740,13 +740,13 @@ public class DashboardFrame extends JFrame {
         try {
             Connection conn = DBConnection.getConnection();
             PreparedStatement pst = conn.prepareStatement(
-                "SELECT u.TotalXP, l.LevelName FROM USER u " +
+                "SELECT u.TotalXP, u.CurrentLevel, l.LevelName FROM USER u " +
                 "JOIN LEVEL l ON u.CurrentLevel = l.LevelID WHERE u.UserID = ?");
             pst.setInt(1, userId);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 xpLabel.setText("XP: " + rs.getInt("TotalXP"));
-                levelLabel.setText("Level: " + rs.getString("LevelName") + "  |  ");
+                levelLabel.setText("Level " + rs.getInt("CurrentLevel") + " (" + rs.getString("LevelName") + ")  |  ");
             }
         } catch (SQLException e) {
             System.err.println("Error loading stats: " + e.getMessage());

@@ -102,10 +102,10 @@ INSERT INTO CATEGORY VALUES
 
 INSERT INTO LEVEL VALUES
 (1, 1, 'Beginner',  0),
-(2, 2, 'Explorer',  500),
-(3, 3, 'Achiever',  1500),
-(4, 4, 'Champion',  3500),
-(5, 5, 'Legend',    7500);
+(2, 2, 'Explorer',  100),
+(3, 3, 'Achiever',  250),
+(4, 4, 'Champion',  500),
+(5, 5, 'Legend',    1000);
 
 INSERT INTO USER VALUES
 (1, 'john_doe',   'john@example.com', 'pwd1', 'John Doe',   'Building better habits', 3, 1650, '2024-01-10', '2024-11-19', 1),
