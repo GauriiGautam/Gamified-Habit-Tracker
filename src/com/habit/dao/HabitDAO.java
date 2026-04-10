@@ -28,7 +28,20 @@ public class HabitDAO implements HabitOperations {
 
     @Override
     public void addHabit(int userId, int categoryId, String habitName,
-            String frequency, int difficultyLevel, int xpValue) {
+            String frequency, int difficultyLevel, int xpValue) throws com.habit.exceptions.DuplicateHabitException {
+        
+        String checkSql = "SELECT COUNT(*) FROM HABIT WHERE UserID = ? AND HabitName = ?";
+        try (PreparedStatement checkStmt = conn.prepareStatement(checkSql)) {
+            checkStmt.setInt(1, userId);
+            checkStmt.setString(2, habitName);
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                throw new com.habit.exceptions.DuplicateHabitException("A habit with the name '" + habitName + "' already exists.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error checking for duplicate habit: " + e.getMessage());
+        }
+
         String sql = "INSERT INTO HABIT (HabitID, UserID, CategoryID, HabitName, Frequency, DifficultyLevel, XPValue, CreatedDate, IsActive) "
                 + "VALUES ((SELECT IFNULL(MAX(HabitID),0)+1 FROM HABIT h2), ?, ?, ?, ?, ?, ?, CURDATE(), 'Active')";
         try (PreparedStatement pst = conn.prepareStatement(sql)) {

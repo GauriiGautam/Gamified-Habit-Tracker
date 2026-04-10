@@ -2,8 +2,10 @@ package com.habit.interfaces;
 
 import java.util.List;
 
+import com.habit.exceptions.DuplicateHabitException;
+
 public interface HabitOperations {
-    void addHabit(int userId, int categoryId, String habitName, String frequency, int difficultyLevel, int xpValue);
+    void addHabit(int userId, int categoryId, String habitName, String frequency, int difficultyLevel, int xpValue) throws DuplicateHabitException;
 
     void updateHabit(int habitId, String newName);
 

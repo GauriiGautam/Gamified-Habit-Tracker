@@ -225,8 +225,13 @@ public class AddHabitFrame extends JFrame {
             int xpValue = Integer.parseInt(xpField.getText().trim());
 
             if (editHabitId == -1) {
-                dao.addHabit(userId, categoryId, habitName, frequency, difficulty, xpValue);
-                JOptionPane.showMessageDialog(this, "Habit '" + habitName + "' added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                try {
+                    dao.addHabit(userId, categoryId, habitName, frequency, difficulty, xpValue);
+                    JOptionPane.showMessageDialog(this, "Habit '" + habitName + "' added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } catch (com.habit.exceptions.DuplicateHabitException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Duplicate Habit", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
             } else {
                 String catName = categoryStr.split(" - ")[1];
                 dao.updateFullHabit(editHabitId, habitName, catName, frequency, 1, difficulty);
