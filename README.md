@@ -4,17 +4,6 @@ A Java-based desktop application that helps users build and maintain daily habit
 
 ---
 
-## 👥 Team Members
-
-| Name | Role |
-|------|------|
-| Rachit Doshi | Java GUI Development + JDBC Integration |
-| Gauri Gautam | Database Design + SQL Queries |
-| Ishan Malviya | DAO Layer + OOP Design |
-| Dilip Maurya | Normalization + DBMS Reports |
-
----
-
 ## 🚀 Features
 
 - 🔐 User Authentication (Login & Register)
